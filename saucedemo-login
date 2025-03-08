@@ -1,0 +1,24 @@
+from playwright.sync_api import sync_playwright
+
+def saucedemo_login():
+    # Login credentials
+    username = "standard_user"
+    password = "secret_sauce"
+
+    with sync_playwright() as p:
+        # Launch browser (headless=False to see it)
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
+
+        # Navigate to SauceDemo login page
+        page.goto("https://www.saucedemo.com/")
+
+        # Fill in username and password
+        page.fill("input#user-name", username)
+        page.fill("input#password", password)
+
+        # Click the login button
+        page.click("input#login-button")
+
+        # Wait for the products page to load
+        page.wait_for_selector(".inventory_list")
