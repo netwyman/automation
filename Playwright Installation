@@ -1,0 +1,118 @@
+Installing Playwright on Windows 10 is straightforward. Follow these step-by-step instructions:
+
+#############################################################################
+Step 1: Install Node.js (For JavaScript/TypeScript) or Python (For Python)
+#############################################################################
+
+Playwright supports both JavaScript/TypeScript and Python. Install the one you need.
+
+Option 1: Install Node.js (For JavaScript/TypeScript)
+
+Download Node.js from the official website:
+
+👉 https://nodejs.org/
+
+Install it by running the .msi installer and selecting LTS (Long Term Support).
+
+Verify installation by opening Command Prompt (cmd) and running:
+
+node -v
+npm -v
+
+If installed correctly, it should show version numbers.
+
+
+#############################################################################
+Option 2: Install Python (For Python)
+#############################################################################
+
+Download Python from the official website:
+👉 https://www.python.org/downloads/
+
+Install it and make sure to check "Add Python to PATH" during installation.
+Verify installation by running:
+
+python --version
+
+Step 2: Install Playwright
+
+For JavaScript/TypeScript
+
+Open Command Prompt (cmd) or PowerShell.
+
+Run the following command:
+
+npm init playwright@latest
+
+Select the desired options (browser, framework, etc.).
+
+Playwright will be installed, along with necessary browsers.
+
+For Python
+Open Command Prompt (cmd).
+Run:
+
+pip install playwright
+
+Install browsers:
+
+playwright install
+
+#############################################################################
+Step 3: Verify Installation
+#############################################################################
+
+To check if Playwright is installed correctly, run:
+
+For JavaScript/TypeScript
+npx playwright --version
+
+For Python
+
+playwright --version
+If it shows a version number, Playwright is installed successfully! 🎉
+
+
+Step 4: Run a Test Script
+Try running a simple script to verify Playwright is working:
+
+JavaScript
+Create a file test.js and add:
+
+js
+const { chromium } = require('playwright');
+
+(async () => {
+    const browser = await chromium.launch();
+    const page = await browser.newPage();
+    await page.goto('https://example.com');
+    console.log(await page.title());
+    await browser.close();
+})();
+
+Run it using:
+=============================
+node test.js
+=============================
+Python
+Create a file test.py and add:
+
+python
+
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    page = browser.new_page()
+    page.goto("https://example.com")
+    print(page.title())
+    browser.close()
+
+Run it using:
+=============================
+python test.py
+=============================
+✅ Installation Complete!
+
+Now you can start using Playwright for automation. Need help with something specific? 🚀
+
