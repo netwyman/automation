@@ -1,0 +1,37 @@
+from playwright.sync_api import sync_playwright
+
+def amazon_login():
+    email = "your-email@example.com"  # Replace with your email
+    password = "your-password"        # Replace with your password
+
+    with sync_playwright() as p:
+        # Launch browser (headless=False for visible mode)
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
+
+        # Navigate to Amazon login page
+        page.goto("https://www.amazon.com/ap/signin")
+
+        # Fill in email/phone number
+        page.fill("input#ap_email", email)
+        page.click("input#continue")  # Click Continue button
+
+        # Fill in password
+        page.fill("input#ap_password", password)
+
+        # Click Sign-In button
+        page.click("input#signInSubmit")
+
+        # Wait for successful login (Amazon homepage or account page)
+        page.wait_for_load_state("networkidle")
+
+        # Take a screenshot after login
+        page.screenshot(path="amazon_logged_in.png")
+
+        print("Login successful! Screenshot saved.")
+
+        # Close browser
+        browser.close()
+
+if __name__ == "__main__":
+    amazon_login()
